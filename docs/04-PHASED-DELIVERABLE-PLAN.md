@@ -18,7 +18,7 @@ The tracks are independent through early phases and converge around Nuxt Phase 4
 
 Each phase has: **entry criteria** (what must be true to start), **deliverables** (concrete artifacts), **exit gate** (the one question that answers "done?"), **dependencies** (what blocks this phase), and **risk flags** (known hazards).
 
-Durations in this document are illustrative and relative. Firm dates require the Strapi track's start date to be committed (see `07-OPEN-QUESTIONS.md` Q3 resolution).
+Durations in this document are in working days from project start (not calendar dates). Total expected duration is **6–8 weeks** of active work. Firm calendar dates require the project start date to be committed (see `07-OPEN-QUESTIONS.md` Q3 resolution for the Strapi ownership dependency).
 
 ---
 
@@ -26,36 +26,38 @@ Durations in this document are illustrative and relative. Firm dates require the
 
 ```mermaid
 gantt
-    title Phase dependencies (durations illustrative, not dates)
+    title Phase dependencies — working days from project start
     dateFormat  X
-    axisFormat  %s
+    axisFormat  Day %s
 
     section Nuxt track
-    P0 Scaffold              :p0, 0, 2w
-    P1 Design system         :p1, after p0, 4w
-    P2 Shell & IA            :p2, after p1, 3w
-    P3 Homepage              :p3, after p2, 3w
-    P4 Content archetypes    :p4, after p3, 4w
-    P5 Content rollout       :p5, after p4, 4w
-    P6 Search & admin        :p6, after p5, 3w
-    P7 A11y & polish         :p7, after p6, 3w
-    P8 Cutover               :p8, after p7, 2w
+    P0 Scaffold              :p0, 0, 2d
+    P1 Design system         :p1, after p0, 7d
+    P2 Shell & IA            :p2, after p1, 4d
+    P3 Homepage              :p3, after p2, 4d
+    P4 Content archetypes    :p4, after p3, 5d
+    P5 Content rollout       :p5, after p4, 5d
+    P6 Search & admin        :p6, after p5, 3d
+    P7 A11y & polish         :p7, after p6, 4d
+    P8 Cutover               :p8, after p7, 2d
 
     section Strapi track
-    S0 Inventory             :s0, 0, 1w
-    S1 Provision v5          :s1, after s0, 1w
-    S2 Schemas               :s2, after s1, 2w
-    S3 Custom code           :s3, after s2, 3w
-    S4 Media                 :s4, after s2, 1w
-    S5 Migration script      :s5, after s3, 3w
-    S6 Users & perms         :s6, after s5, 1w
-    S7 Integration with P3+  :s7, after s6, 2w
-    S8 Author UAT            :s8, after s7, 2w
-    S9 Strapi cutover        :s9, after s8, 1w
+    S0 Inventory             :s0, 0, 1d
+    S1 Provision v5          :s1, after s0, 1d
+    S2 Schemas               :s2, after s1, 2d
+    S3 Custom code           :s3, after s2, 3d
+    S4 Media                 :s4, after s2, 1d
+    S5 Migration script      :s5, after s3, 3d
+    S6 Users & perms         :s6, after s5, 1d
+    S7 Integration with P3+  :s7, after s6, 2d
+    S8 Author UAT            :s8, after s7, 3d
+    S9 Strapi cutover        :s9, after s8, 1d
 
     section Gates
     S7 must be done before P4 :milestone, g1, after s7, 0d
 ```
+
+Total shape: **approximately 6–8 calendar weeks** from project start to public cutover. The Nuxt track runs roughly 7 working weeks; the Strapi track runs roughly 3.5 working weeks in parallel. The critical path (see §2) is about 6 working weeks.
 
 The critical coupling: **Nuxt Phase 4 cannot start until Strapi Phase S7 is complete.** Nuxt Phases 0–3 run against stubbed or mock data and do not block on the Strapi track. Nuxt Phases 6–8 depend on S7 and S8 being stable.
 
@@ -63,14 +65,22 @@ The critical coupling: **Nuxt Phase 4 cannot start until Strapi Phase S7 is comp
 
 The project's critical path runs through:
 
-**S0 → S1 → S2 → S3 → S5 → S7 → P4 → P5 → P8**
+**S0 → S1 → S2 → S3 → S5 → S7 → P4 → P5 → P7 → P8** (approximately 31 working days, or 6 working weeks).
 
-Phases with the largest schedule uncertainty:
+Why this schedule is compressed compared to traditional estimates:
 
-- **P1 Design system.** The hinge of the Nuxt track. If P1 is half-done when page-building starts, every page reworks when the tokens or primitives change. Budget conservatively; plan for one round of revisions after P3 validates tokens against real content.
-- **S3 Strapi custom code port.** Size depends on what the S0 inventory surfaces. Projects with more custom controllers and lifecycle hooks take longer. Flag early in S0 if the custom-code surface area is large.
+- **AI-assisted development** handles the repetitive scaffolding — page templates, CMS integration code, data-migration scaffolding, component implementation. The developer reviews and refines rather than writes from scratch. This is the single largest compression factor; otherwise-multi-week phases collapse to days.
+- **`hub-migration-tools` as a starting point** for the Strapi track (see `03-STRAPI-UPGRADE-PLAN.md`). That tool already solves the phase scaffolding, parity audit, and fix-script patterns; adaptation cost is limited to expanding content-type handling.
+- **Planning is complete.** The project starts with known requirements, an approved visual direction, and a decided stack — no discovery phase.
 
-Slack exists in: S4 (media) which runs parallel to S3; S6 (users/perms) which is mostly manual and can compress; P7 (polish) which has partial flexibility against the cutover window.
+Phases with the largest remaining schedule uncertainty:
+
+- **P1 Design system.** The hinge of the Nuxt track. Design taste requires human iteration that does not compress the same way code generation does. If P1 is half-done when page-building starts, every page reworks when the tokens or primitives change. Budget conservatively; plan for one round of revisions after P3 validates tokens against real content.
+- **P5 Content rollout.** The long tail of one-off pages is a volume problem, not a complexity problem. Inventorying every URL on the current site during P3 is the mitigation.
+- **S3 Strapi custom code port.** Size depends on what the S0 inventory surfaces. Projects with more custom controllers and lifecycle hooks take longer. Flag early in S0 if the custom-code surface area is larger than a day or two of work.
+- **S8 Author UAT.** Author availability is the schedule risk here, not the work itself. Book sessions at the start of S7, not at the start of S8.
+
+Slack exists in: S4 (media) which runs parallel to S3; S6 (users/perms) which is mostly manual and can compress; P6 (search and admin) which is relatively self-contained.
 
 ---
 
@@ -517,5 +527,5 @@ This sequencing means there is a period — usually a few days — when v5 is ca
 ## 6. What this document does not cover
 
 - Test plan. Pending in `TEST-PLAN.md` (forthcoming). That document will cover test strategy, coverage targets, automation approach, and the specific test procedures referenced here.
-- Specific dates. Durations are illustrative. Firm dates require the Strapi track's start commitment (see `07-OPEN-QUESTIONS.md` Q3).
+- Specific calendar dates. Durations are in working days from project start; total is 6–8 weeks of active work. Firm calendar dates require the project start commitment (see `07-OPEN-QUESTIONS.md` Q3).
 - Post-launch work. Strapi 6, bilingual content, schema redesign, and related post-v1 initiatives are tracked separately.

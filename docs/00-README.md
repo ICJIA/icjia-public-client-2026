@@ -21,7 +21,7 @@ Read in the order listed. Files are numbered; skip what isn't in your path.
 | # | Document | Status | Audience |
 |---|---|---|---|
 | 00 | `00-README.md` | — | everyone (this file) |
-| 01 | `01-EXECUTIVE-SUMMARY.md` | v1.0 | non-technical leadership |
+| 01 | `01-EXECUTIVE-SUMMARY.md` | v2.0 | non-technical leadership (self-contained; has its own glossary) |
 | 02 | `02-MASTER-DESIGN-PLAN.md` | DRAFT v0.5 | technical team |
 | 03 | `03-STRAPI-UPGRADE-PLAN.md` | DRAFT v0.1 | backend / CMS engineers |
 | 04 | `04-PHASED-DELIVERABLE-PLAN.md` | DRAFT v0.1 | project management |

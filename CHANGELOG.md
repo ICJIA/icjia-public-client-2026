@@ -9,6 +9,43 @@ Versioning: [Semantic Versioning](https://semver.org/spec/v2.0.0.html). The pack
 
 ---
 
+## [0.6.0] — 2026-04-23
+
+Executive summary expanded for non-technical readers; project timeline revised to 6–8 weeks.
+
+### Why this revision
+
+Two changes driven by leadership feedback:
+
+1. The previous executive summary was too brief for readers with no technical background. It used terms like "content management system" and "Netlify" without defining them, referenced other documents for detail, and assumed the reader would know what a "static site" was. Leadership asked for a document that stands entirely on its own — a manager can read it cold and understand the whole project without reading anything else.
+2. The previous timeline showed 9–12 months of work, drawn from traditional-rebuild estimates. With AI-assisted development in play, the actual schedule compresses substantially — the repetitive scaffolding (page templates, CMS-to-frontend plumbing, data-migration code) is done in days rather than weeks. Human-paced work (design iteration, content authoring, accessibility review, author UAT) is now the schedule-determining factor.
+
+### Changed
+
+- `docs/01-EXECUTIVE-SUMMARY.md` — rewritten and expanded to v2.0 (approximately 2,500 words, up from ~1,200 in v1.0). Now self-contained: no cross-references to other documents. New §10 adds a plain-language glossary defining every technical term used in the document. Emphasizes the two things non-technical leadership actually cares about: the site will **look better and work faster**. New §6 includes leadership-visible milestones by week.
+- `docs/04-PHASED-DELIVERABLE-PLAN.md` §1 Gantt — durations revised from weeks to working days to reflect the compressed schedule. Totals: Nuxt track ≈ 7 working weeks, Strapi track ≈ 3.5 working weeks in parallel, critical path ≈ 6 working weeks. Added explanatory paragraph on why the schedule is compressed (AI-assisted development, `hub-migration-tools` as starting point, completed planning). Expanded "phases with schedule uncertainty" to include P5 and S8 alongside P1 and S3.
+- `docs/04-PHASED-DELIVERABLE-PLAN.md` — all remaining "durations illustrative" language updated to reference working days and the 6–8 week total.
+- `docs/00-README.md` — document status row for 01-EXECUTIVE-SUMMARY updated to v2.0 with a note that it is now self-contained.
+
+### Schedule rationale
+
+The 6–8 week estimate is realistic because:
+
+- **AI-assisted development** handles the bulk of repetitive scaffolding. The developer reviews and refines rather than writes from scratch.
+- **Planning is complete** — no discovery phase. Approved visual direction, decided stack, inventoried content.
+- **Fixed scope** — rebuilding what exists, not adding features.
+- **`hub-migration-tools`** (see separate GitHub repo) provides the Strapi track with a mature starting point; adaptation cost is content-type handling, not infrastructure.
+
+Pacing items that cannot be compressed: design taste iteration (P1), content-volume work (P5), accessibility review by real humans (P7), and author UAT (S8). The schedule is built around these.
+
+### Not changed
+
+- `02-MASTER-DESIGN-PLAN.md` — no duration language to revise.
+- `05-DESIGN-SYSTEM.md`, `06-ACCESSIBILITY-STRATEGY.md`, `07-OPEN-QUESTIONS.md` — not affected.
+- The phase structure itself (9 Nuxt phases + 10 Strapi phases, S7 → P4 gate) — unchanged.
+
+---
+
 ## [0.5.1] — 2026-04-23
 
 Factual correction: ICJIA's Strapi 3 instance runs on SQLite, not MongoDB. The prior revision treated Mongo as a possible (and therefore plan-for-it) case. Now recorded as known fact; the migration becomes SQLite → SQLite.
