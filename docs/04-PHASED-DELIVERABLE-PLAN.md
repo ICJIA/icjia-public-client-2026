@@ -115,7 +115,7 @@ An empty Nuxt 4 app deploys successfully to `next.icjia.illinois.gov`. Clicking 
 **Entry criteria**
 - P0 exit gate met.
 - `05-DESIGN-SYSTEM.md` v0.1 is current.
-- Mockup HTML (`ICJIA_Redesign_v2_squared.html`) is available as a reference.
+- Mockup HTML and reference render available at [`ui/`](../ui/) (`ICJIA_Redesign_v2_squared.html` and the full-page PNG).
 
 **Deliverables**
 - Tailwind v4 `@theme` layer with all color, spacing, typography, and shadow tokens from `05-DESIGN-SYSTEM.md`.

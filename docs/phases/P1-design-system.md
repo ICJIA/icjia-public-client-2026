@@ -15,7 +15,7 @@ The hinge phase for the whole Nuxt track. Translates the tokens in `05-DESIGN-SY
 
 - P0 exit gate met.
 - `05-DESIGN-SYSTEM.md` v0.1 is current.
-- Mockup HTML (`ICJIA_Redesign_v2_squared.html`) available as a reference.
+- Mockup HTML ([`ui/ICJIA_Redesign_v2_squared.html`](../../ui/ICJIA_Redesign_v2_squared.html)) and full-page render ([`ui/ICJIA_Redesign_v2_squared_full_page.png`](../../ui/ICJIA_Redesign_v2_squared_full_page.png)) available as reference.
 
 ## 3. Scope of work
 

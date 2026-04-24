@@ -9,6 +9,33 @@ Versioning: [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Pre-1.0 
 
 ---
 
+## [0.10.0] — 2026-04-24
+
+UI reference assets committed to `ui/`; README includes a visual of the proposed redesign.
+
+### Why this revision
+
+The planning docs have repeatedly referenced an `ICJIA_Redesign_v2_squared.html` mockup as the source of visual truth. Until now that file lived outside the repository, so anyone reading the planning set had to track it down separately. Committing the HTML mockup and its full-page PNG into `ui/` makes the planning set self-contained: visual direction, strategy, and execution all in one place. The README now embeds the PNG so anyone landing on the repo's GitHub page immediately sees what the new site will look like.
+
+### Added
+
+- `ui/ICJIA_Redesign_v2_squared.html` — working HTML mockup of the redesigned site (42 KB). The reference the planning set and every phase doc points at.
+- `ui/ICJIA_Redesign_v2_squared_full_page.png` — full-page PNG render of the mockup (880 KB). Quick visual review without opening the HTML; also used as the README's hero image.
+
+### Changed
+
+- `README.md` — added a hero image at the top (the full-page PNG), with caption and alt text. New `## UI references` section documents the contents of `ui/`.
+- `docs/05-DESIGN-SYSTEM.md` §Overview — reference to the HTML mockup updated from the old "project knowledge" phrasing to a real relative link into `ui/`.
+- `docs/04-PHASED-DELIVERABLE-PLAN.md` P1 entry criteria — mockup HTML reference updated to link `ui/`.
+- `docs/phases/P1-design-system.md` entry criteria — mockup HTML and PNG references updated to link `ui/`.
+- Filenames normalized from `ICJIA Redesign v2 squared.html` (spaces) to `ICJIA_Redesign_v2_squared.html` (underscores) to match existing references and avoid space-escaping issues in URLs and shell commands.
+
+### Not changed
+
+- Any other planning document. The mockup itself is unchanged; only its location and filename format are.
+
+---
+
 ## [0.9.0] — 2026-04-24
 
 Repository renamed; top-level `README.md` and `LICENSE` added.

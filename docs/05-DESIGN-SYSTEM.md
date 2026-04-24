@@ -9,7 +9,7 @@
 
 ## Overview
 
-The approved visual direction (see `ICJIA_Redesign_v2_squared.html` in project knowledge) establishes a dark-first, editorial, deliberately angular visual language. This is a meaningful break from the current Material-derived palette. This document is the single source of truth for every visual decision in the new site. Components and pages reference it; they do not override it.
+The approved visual direction (see [`ui/ICJIA_Redesign_v2_squared.html`](../ui/ICJIA_Redesign_v2_squared.html), with full-page reference render at [`ui/ICJIA_Redesign_v2_squared_full_page.png`](../ui/ICJIA_Redesign_v2_squared_full_page.png)) establishes a dark-first, editorial, deliberately angular visual language. This is a meaningful break from the current Material-derived palette. This document is the single source of truth for every visual decision in the new site. Components and pages reference it; they do not override it.
 
 This document translates the HTML mockup's design tokens into the Nuxt UI 4 theming system. It is expected to grow during Phase 1 as tokens are validated against real content and contrast audits.
 

@@ -1,5 +1,9 @@
 # ICJIA Public Website 2026 — Documentation
 
+![Full-page render of the proposed ICJIA website redesign: dark, angular, contemporary editorial layout with hero, news ribbon, quick-links, research grid, and stats sections.](./ui/ICJIA_Redesign_v2_squared_full_page.png)
+
+*Initial UI render of the proposed redesign. Full HTML mockup and assets in [`ui/`](./ui/).*
+
 Planning and design documentation for the rebuild of [icjia.illinois.gov](https://icjia.illinois.gov).
 
 ## Status
@@ -19,6 +23,15 @@ Full detail, written for non-technical leadership, is in [`docs/01-EXECUTIVE-SUM
 | A non-technical manager or sponsor | [`docs/01-EXECUTIVE-SUMMARY.md`](./docs/01-EXECUTIVE-SUMMARY.md) — self-contained; has its own glossary |
 | A project sponsor or program manager | [`docs/00-README.md`](./docs/00-README.md) — for reading paths by role |
 | An engineer, designer, or security reviewer | [`docs/00-README.md`](./docs/00-README.md) — it routes you to the right file |
+
+## UI references
+
+The [`ui/`](./ui/) directory contains initial UI renders for the proposed redesign — the visual direction the planning set is built around.
+
+- [`ui/ICJIA_Redesign_v2_squared.html`](./ui/ICJIA_Redesign_v2_squared.html) — working HTML mockup of the redesigned site. The source of truth for visual direction during implementation; referenced by `docs/05-DESIGN-SYSTEM.md` and the Phase 1 (design system) doc.
+- [`ui/ICJIA_Redesign_v2_squared_full_page.png`](./ui/ICJIA_Redesign_v2_squared_full_page.png) — full-page PNG render of the same mockup, for quick visual reference without opening the HTML. This is the image shown at the top of this file.
+
+These are pre-implementation reference artifacts. Per-phase design specifics (screen-by-screen component breakdowns, per-page design notes) fill in during "design round 2" in [`docs/phases/*.md`](./docs/phases/) once the broader design artifacts are shared.
 
 ## Repository scope
 
