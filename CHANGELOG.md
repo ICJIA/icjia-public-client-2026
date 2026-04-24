@@ -5,7 +5,33 @@ All notable changes to the ICJIA public website project are documented here.
 This repository currently holds the planning set for the rebuild of icjia.illinois.gov. Entries below track planning-document work. Once implementation begins, code changes will appear here as well.
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
-Versioning: [Semantic Versioning](https://semver.org/spec/v2.0.0.html). The package version follows the master design plan's version (currently in `docs/02-MASTER-DESIGN-PLAN.md`). Pre-1.0 minor bumps reflect planning-set revisions; 1.0 will be cut when the planning set is accepted as the basis for implementation.
+Versioning: [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Pre-1.0 minor bumps reflect planning-set revisions; 1.0 will be cut when the planning set is accepted as the basis for implementation. Individual documents carry their own frontmatter version reflecting their internal maturity independently of the changelog's package version.
+
+---
+
+## [0.9.0] — 2026-04-24
+
+Repository renamed; top-level `README.md` and `LICENSE` added.
+
+### Why this revision
+
+The repository was renamed from `icjia-public-client-2026` to `icjia-public-client-2026-documentation` to reflect its actual scope — this repo is planning documentation only; implementation code will live in separate repositories once the planning set is accepted. A top-level `README.md` makes the scope obvious to anyone landing from GitHub; a `LICENSE` file formalizes the MIT terms used across ICJIA's public repos (matches `ICJIA/hub-migration-tools`).
+
+### Added
+
+- `README.md` — project-level README at the repo root. Covers repository scope (planning-only), current status (planning phase), reading paths by role, author (Chris Schweda / IDS), and contributing conventions.
+- `LICENSE` — MIT License. Copyright (c) 2026 Illinois Criminal Justice Information Authority (ICJIA). Mirrors the license used on [`ICJIA/hub-migration-tools`](https://github.com/ICJIA/hub-migration-tools).
+
+### Changed
+
+- Repository renamed on GitHub: `icjia-public-client-2026` → `icjia-public-client-2026-documentation`. Local `origin` remote URL updated to match; GitHub auto-redirects old URL references, but canonical links should use the new name.
+- `CHANGELOG.md` release-tag URLs at the bottom of the 0.4.0 and 0.5.0 entries updated from the old repo name to the new one.
+- `CHANGELOG.md` versioning preamble rewritten — the previous note claimed the changelog version followed `02-MASTER-DESIGN-PLAN.md`, but the two have drifted (master plan is at v0.5; changelog is at 0.9.0). The preamble now accurately describes the convention actually in use: each document carries its own frontmatter version for its internal maturity; the changelog's package version is independent and reflects accumulated planning-set revisions.
+
+### Not changed
+
+- `docs/*` — all planning documents untouched in this pass.
+- Author attribution — Chris Schweda remains project lead and sole implementer per 0.8.1.
 
 ---
 
@@ -225,5 +251,5 @@ Initial commit of the planning set. This entry retroactively documents the state
 
 ---
 
-[0.5.0]: https://github.com/ICJIA/icjia-public-client-2026/releases/tag/v0.5.0
-[0.4.0]: https://github.com/ICJIA/icjia-public-client-2026/releases/tag/v0.4.0
+[0.5.0]: https://github.com/ICJIA/icjia-public-client-2026-documentation/releases/tag/v0.5.0
+[0.4.0]: https://github.com/ICJIA/icjia-public-client-2026-documentation/releases/tag/v0.4.0
