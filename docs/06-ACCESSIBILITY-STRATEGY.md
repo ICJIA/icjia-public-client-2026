@@ -9,7 +9,7 @@
 
 ## Overview
 
-Accessibility is treated as an architectural property of the new site, not a post-hoc audit target. The bar is higher than for commercial work because this is a state government agency site: public Illinois residents include many with disabilities who depend on accurate, navigable information about criminal justice services, grants, and agency activities.
+Accessibility is treated as an architectural property of the new site, not a post-hoc audit target. The bar is higher than for commercial work because this is a state government agency site with global reach: users include many with disabilities who depend on accurate, navigable information about criminal justice services, grants, and agency activities.
 
 The prior Vue 2 codebase carried 24 runtime DOM-fixing functions in `src/a11y.js` that patched missing ARIA roles, bad table headers, heading-order skips, and so on — symptoms of components emitting incorrect markup. The new architecture aims to eliminate that entire class of problem by starting with components that emit correct markup.
 

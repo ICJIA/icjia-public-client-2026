@@ -1,9 +1,9 @@
 # ICJIA Public Website — Master Design Plan
 
-**Status:** DRAFT v0.5
+**Status:** DRAFT v0.6
 **Target repo:** `icjia-public-nuxt` (new — separate from `icjia-public-client-2021`)
 **Author:** Chris Schweda (IDS — Innovation and Digital Services, ICJIA)
-**Last updated:** 2026-04-24 (Author field set to Chris Schweda / IDS — previously TBD; no content changes in this revision)
+**Last updated:** 2026-05-03 (scope updated to reflect Research Hub separation: §1.2 content split notes Hub content lives in a dedicated project; §3.2 URL convention reframed as cross-project URL preservation; backend Strapi 3→5 migration noted as complete via [`ICJIA/icjia-migration-tools`](https://github.com/ICJIA/icjia-migration-tools))
 **Companion documents:** `00-README.md`, `01-EXECUTIVE-SUMMARY.md`, `03-STRAPI-UPGRADE-PLAN.md`, `04-PHASED-DELIVERABLE-PLAN.md`, `05-DESIGN-SYSTEM.md`, `06-ACCESSIBILITY-STRATEGY.md`, `07-OPEN-QUESTIONS.md`
 **Supersedes (in part):** `docs/NUXT-ARCHITECTURE-RECOMMENDATIONS.md`, `docs/NUXT-REWRITE-PLAN.md` — see [Appendix B](#appendix-b-relationship-to-prior-documents)
 
@@ -40,26 +40,28 @@ This supersedes the SSR approach specified in the prior rewrite plan. The ration
 
 ### 1.2 Content source (hybrid)
 
-**Strapi 5 is the CMS for editor-driven content. `@nuxt/content` is adopted for stable, code-adjacent content.** Strapi 5 is the committed target version; a future upgrade to Strapi 6 is anticipated but not in scope for v1. The new Nuxt app is written against Strapi 5 from day one — no Strapi 3 compatibility is carried forward. Query layer (GraphQL primary, REST for specific cases) is detailed in Section 4.3. The Strapi 3 → 5 upgrade is the subject of `03-STRAPI-UPGRADE-PLAN.md`, which commits to a parallel fresh Strapi 5 instance rather than an in-place stepwise upgrade. Its phases run on a second track; the critical coupling is that Nuxt Phase 4 (content archetypes) gates on Strapi Phase S7 (Nuxt/v5 integration).
+**Strapi 5 is the CMS for editor-driven content. `@nuxt/content` is adopted for stable, code-adjacent content.** Strapi 5 is the committed target version; a future upgrade to Strapi 6 is anticipated but not in scope for v1. The new Nuxt app is written against Strapi 5 from day one — no Strapi 3 compatibility is carried forward. Query layer (GraphQL primary, REST for specific cases) is detailed in Section 4.3.
+
+> **Backend status (2026-05-03):** the Strapi 3 → 5 migration is **complete**. See [`ICJIA/icjia-migration-tools`](https://github.com/ICJIA/icjia-migration-tools) for the tool and audit record, `08-STRAPI-MIGRATION-RUNBOOK.md` for the operational record, and `03-STRAPI-UPGRADE-PLAN.md` for the strategy that was followed. The Strapi-track / Nuxt-track gate (S7 → P4) is met; the front-end work has no remaining cross-track block.
 
 Editor-driven content types on Strapi 5 support **live preview of unpublished drafts** rendered by the Nuxt app — see Sections 1.8 and 4.5.
 
-The content split:
+> **Scope (2026-05-03):** the **Research Hub** (`/researchhub/...`, including articles, apps, and datasets) is being separated into its own project on its own infrastructure. Hub URLs are preserved as part of that project for SEO continuity (see §3.2). The content split below is for the **public-site portion only**; Hub content types are out of scope for this Nuxt rebuild and are owned by the Hub project.
+
+The content split (public-site portion):
 
 | Content type | Source | Rationale |
 |---|---|---|
 | News posts, press releases | Strapi | High editorial velocity; needs non-technical author workflow |
 | Events, meetings | Strapi | Same |
 | Grants, funding opportunities | Strapi | Frequent edits; structured relations to programs |
-| Research Hub articles, apps, datasets | Strapi | Authors need rich media upload |
 | Biographies, unit pages | Strapi | Changes with staffing |
 | Policies, required-forms index | `@nuxt/content` | Legally reviewed, low velocity, benefits from git history |
 | About pages, unit descriptions, static marketing pages | `@nuxt/content` | Rarely change; review workflow is PR-based |
 | Navigation, footer, disclaimers, redirect tables | `@nuxt/content` (YAML/JSON) | Config, not content |
+| ~~Research Hub articles, apps, datasets~~ | *(separate project)* | Owned by the dedicated Hub project on its own infrastructure; Hub URLs preserved per §3.2 |
 
 This is a **revisable** decision in the sense that the boundary can shift — specific content types can migrate from Strapi to `@nuxt/content` over time if editor workflows allow. It is **not** revisable in the sense of "let's just use Strapi for everything": the goal is to reduce CMS surface area, not preserve it.
-
-**Validation required before this decision is final:** a conversation with current Strapi authors about which content they actually edit frequently vs. which has been static for 18+ months.
 
 ### 1.3 Stack
 
@@ -133,10 +135,10 @@ From the mockup, the primary nav is five items: **About, Research, Grant Resourc
 
 ### 3.2 Content taxonomy
 
-The existing content types are preserved. The URL structure from `NUXT-REWRITE-PLAN.md` Section 4 ("Routing: File-Based") is largely adopted, with these clarifications:
+The existing public-site content types are preserved. The URL structure from `NUXT-REWRITE-PLAN.md` Section 4 ("Routing: File-Based") is largely adopted, with these clarifications:
 
-- `researchhub/` is the existing URL convention and is retained for continuity with existing inbound links; it's presented in the UI as "Research."
-- `irb/` (Institutional Review Board) is retained as a distinct section.
+- **`researchhub/` URLs are preserved as cross-project canonical URLs.** The Research Hub is being delivered as a separate project on its own infrastructure (see §1.2 and `01-EXECUTIVE-SUMMARY.md` §1.1). The hub URLs (`/researchhub/...`) carry years of accumulated SEO authority — external citations, academic references, partner-agency links — and are not given up. The new public site does not render hub content; hub URLs are routed (via DNS / redirect at the edge, or via the Nuxt redirect table where appropriate) to the dedicated Hub project, which serves the same URL paths from its own infrastructure. To search engines, bookmarks, and partner agencies, `/researchhub/...` resolves identically to today.
+- `irb/` (Institutional Review Board) is retained as a distinct section on the public site.
 - `admin/` routes are the only `ssr: false` / island routes in the site.
 - The catch-all `[...slug].vue` at the root is reserved for legacy-URL redirects (from `public/_redirects`) and the 404 page.
 

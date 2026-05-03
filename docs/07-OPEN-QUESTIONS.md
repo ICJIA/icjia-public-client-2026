@@ -40,15 +40,15 @@ The shell will be built i18n-ready — lang switcher in the nav, `hreflang` in `
 
 ### Q3: Strapi 3 → 5 upgrade timing
 
-**Status:** planned (see `03-STRAPI-UPGRADE-PLAN.md`)
-**Target phase:** Strapi Phase S7 gates Nuxt Phase 4
+**Status:** decided / completed
+**Target phase:** Strapi Phase S7 gated Nuxt Phase 4 (gate now met)
 **Owner:** Chris Schweda (IDS) — implementer and post-launch maintainer
 
-The new Nuxt app targets Strapi 5's REST Document Service API. The existing production backend is Strapi 3. The upgrade has to precede (or at least reach API-stable status before) Phase 4. If the upgrade slips, the Nuxt frontend sits in Phases 1–3 (design system, shell, homepage) and waits. Stubbed mock data can unblock Phase 3 in a pinch but not Phase 4 and beyond.
+The new Nuxt app targets Strapi 5's REST Document Service API. The legacy production backend was Strapi 3. The upgrade had to precede (or at least reach API-stable status before) Phase 4.
 
-**Coordination needed:** confirm with backend owner that Strapi 5 upgrade is planned, scoped, and timelined. If not, escalate.
+**Resolution (2026-04-23).** The upgrade approach is captured in `03-STRAPI-UPGRADE-PLAN.md`. The committed approach is a **parallel fresh Strapi 5 instance**, not an in-place stepwise upgrade through v3 → v4 → v5. A new v5 instance is provisioned alongside v3; schemas, custom code, media, and data are migrated into it via a purpose-built migration script; cutover happens in a single window. The v3 instance remains untouched until the final cutover and is retained read-only for 30 days afterward.
 
-**Resolution (2026-04-23).** The upgrade approach is now captured in `03-STRAPI-UPGRADE-PLAN.md`. The committed approach is a **parallel fresh Strapi 5 instance**, not an in-place stepwise upgrade through v3 → v4 → v5. A new v5 instance is provisioned alongside v3; schemas, custom code, media, and data are migrated into it via a purpose-built migration script; cutover happens in a single window. The v3 instance remains untouched until the final cutover and is retained read-only for 30 days afterward. The critical coupling remains: Nuxt Phase 4 cannot start until Strapi Phase S7 (integration of the v5 instance with the Nuxt staging app) is complete. What remains open is the *start date* for the Strapi track, which depends on backend-owner commitment and hosting decisions.
+**Update (2026-05-03) — completed.** The Strapi 3 → 5 migration has been executed. The migration tool is at [`ICJIA/icjia-migration-tools`](https://github.com/ICJIA/icjia-migration-tools), forked from `icjia-hub-migration-tools` and adapted for the public-site content types (every news item, event, grant, research record, biography, unit page, policy document, image, and uploaded file). Strapi Phase S7 is met; the Nuxt track has no remaining cross-track block. Operational record in `08-STRAPI-MIGRATION-RUNBOOK.md`.
 
 ### Q4: Edge function vs. Nitro server route for form submissions
 

@@ -1,8 +1,10 @@
 # ICJIA Public Website Redesign — Documentation
 
-**Last updated:** 2026-04-24
+**Last updated:** 2026-05-03
 
-This folder contains the planning set for the rebuild of icjia.illinois.gov. The site will be faster, easier for staff to update, and meet stricter accessibility standards. Behind the scenes the underlying content system (Strapi) is also being upgraded from a version that is no longer supported to the current version.
+This folder contains the planning set for the rebuild of icjia.illinois.gov. The site will be faster, easier for staff to update, and meet stricter accessibility standards.
+
+**Backend migration status:** the underlying content system (Strapi) has already been upgraded from the legacy version (Strapi 3, end-of-life) to the current version (Strapi 5). The migration tool is at [`ICJIA/icjia-migration-tools`](https://github.com/ICJIA/icjia-migration-tools); the procedure is recorded in `08-STRAPI-MIGRATION-RUNBOOK.md`. The remaining work — and the active subject of this planning set — is the front-end rebuild on top of that newer backend.
 
 ## Reading paths by role
 
@@ -22,14 +24,14 @@ Read in the order listed. Files are numbered; skip what isn't in your path.
 | # | Document | Status | Audience |
 |---|---|---|---|
 | 00 | `00-README.md` | — | everyone (this file) |
-| 01 | `01-EXECUTIVE-SUMMARY.md` | v2.0 | non-technical leadership (self-contained; has its own glossary) |
+| 01 | `01-EXECUTIVE-SUMMARY.md` | v2.3 | non-technical leadership (self-contained; has its own glossary) |
 | 02 | `02-MASTER-DESIGN-PLAN.md` | DRAFT v0.5 | technical team |
-| 03 | `03-STRAPI-UPGRADE-PLAN.md` | DRAFT v0.1 | backend / CMS engineers |
-| 04 | `04-PHASED-DELIVERABLE-PLAN.md` | DRAFT v0.1 | project management |
+| 03 | `03-STRAPI-UPGRADE-PLAN.md` | COMPLETED | backend / CMS engineers — historical record of the upgrade strategy that was followed |
+| 04 | `04-PHASED-DELIVERABLE-PLAN.md` | DRAFT v0.3 (Strapi track complete) | project management |
 | 05 | `05-DESIGN-SYSTEM.md` | DRAFT v0.1 | frontend engineers, design |
 | 06 | `06-ACCESSIBILITY-STRATEGY.md` | DRAFT v0.1 | frontend, QA, a11y reviewers |
 | 07 | `07-OPEN-QUESTIONS.md` | LIVING | everyone — appended as decisions close |
-| 08 | `08-STRAPI-MIGRATION-RUNBOOK.md` | DRAFT v0.1 | backend / CMS engineers — operational companion to 03 |
+| 08 | `08-STRAPI-MIGRATION-RUNBOOK.md` | COMPLETED | backend / CMS engineers — operational record of the executed migration |
 | 09 | `09-SECURITY-REQUIREMENTS.md` | DRAFT v0.1 | project lead + security reviewer — must-fix items before/during implementation |
 
 ### Subfolders

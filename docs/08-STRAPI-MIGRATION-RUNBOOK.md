@@ -1,24 +1,24 @@
 # ICJIA Public Website — Strapi 3 → 5 Migration Runbook
 
-**Status:** DRAFT v0.1
+**Status:** COMPLETED — historical record (the migration this runbook describes has been executed; see [`ICJIA/icjia-migration-tools`](https://github.com/ICJIA/icjia-migration-tools))
 **Companion to:** `03-STRAPI-UPGRADE-PLAN.md`, `04-PHASED-DELIVERABLE-PLAN.md`
-**Scope:** Operational procedure for running the Strapi 3 → Strapi 5 data migration via the `ICJIA/hub-migration-tools` framework (v4.1.0), from pre-migration audit through production cutover
-**Last updated:** 2026-04-24 (named Chris Schweda / IDS as sole operator and S0 inventory signer)
+**Scope:** Operational procedure used to run the Strapi 3 → Strapi 5 data migration via the [`ICJIA/icjia-migration-tools`](https://github.com/ICJIA/icjia-migration-tools) framework, from pre-migration audit through production cutover
+**Last updated:** 2026-05-03 (status flipped to COMPLETED; tool reference points to the actual fork at `ICJIA/icjia-migration-tools`)
 
 ---
 
 ## 1. Overview
 
-This document is the **operational companion** to `03-STRAPI-UPGRADE-PLAN.md`. The upgrade plan describes *what* the migration does and *why* a parallel fresh Strapi 5 instance was chosen over an in-place upgrade. This runbook describes *how* to actually run it: exact commands, config fields, and go/no-go checkpoints.
+This document is the **operational companion** to `03-STRAPI-UPGRADE-PLAN.md`. The upgrade plan describes *what* the migration did and *why* a parallel fresh Strapi 5 instance was chosen over an in-place upgrade. This runbook describes *how* it was actually run: exact commands, config fields, and go/no-go checkpoints. It is retained as a record of the procedure.
 
-Audience: the developer executing the migration — **Chris Schweda (IDS — Innovation and Digital Services, ICJIA)**. Chris is the sole operator for this migration and the accountable person for fixes after launch. Read this top to bottom before the first dry-run; treat it as a checklist during execution.
+Audience: anyone reviewing how the migration was executed — and, if the project ever revisits this work, the developer running it again. **Chris Schweda (IDS — Innovation and Digital Services, ICJIA)** was the sole operator for this migration and remains the accountable person for fixes after launch.
 
 Scope boundaries:
 
-- **In scope:** data migration procedure, local dry-run methodology, production run on the pre-provisioned DigitalOcean Strapi 5 server, rollback, post-migration sign-off.
+- **In scope:** data migration procedure as executed, local dry-run methodology, production run on the pre-provisioned DigitalOcean Strapi 5 server, rollback, post-migration sign-off.
 - **Out of scope:** upgrade strategy (in `03-STRAPI-UPGRADE-PLAN.md`), schema redesign, Strapi 6, DO droplet provisioning (already done), frontend cutover (handled in Nuxt track P8).
 
-Source of migration code: [`ICJIA/hub-migration-tools`](https://github.com/ICJIA/hub-migration-tools) v4.1.0. This tool was developed for ResearchHub; we adapt it for the public-site content types.
+Source of migration code: [`ICJIA/icjia-migration-tools`](https://github.com/ICJIA/icjia-migration-tools) — forked from `icjia-hub-migration-tools` (originally built for ResearchHub) and adapted for the public-site content types.
 
 Source and target database: **SQLite on both sides** (see `03-STRAPI-UPGRADE-PLAN.md` §3).
 
@@ -31,8 +31,8 @@ Source and target database: **SQLite on both sides** (see `03-STRAPI-UPGRADE-PLA
 | Tool | Minimum version | Purpose |
 |---|---|---|
 | Node | 18 | Running the migration scripts and local Strapi 5 |
-| pnpm | 10 | Package manager for hub-migration-tools and Strapi 5 |
-| `gh` | any recent | Forking/cloning hub-migration-tools, API introspection |
+| pnpm | 10 | Package manager for icjia-migration-tools and Strapi 5 |
+| `gh` | any recent | Forking/cloning icjia-migration-tools, API introspection |
 | `ssh` | any recent | Remote operations on the DO Strapi 5 server |
 | `scp` | any recent | File copies to/from the DO server |
 | `sqlite3` | 3.x | Inspecting SQLite files, checksums |
@@ -46,7 +46,7 @@ Source and target database: **SQLite on both sides** (see `03-STRAPI-UPGRADE-PLA
 
 ### 2.3 Artifacts
 
-- Fork or local clone of `ICJIA/hub-migration-tools` (v4.1.0).
+- Fork or local clone of `ICJIA/icjia-migration-tools` (v4.1.0).
 - Local Strapi 5 instance used exclusively for dry-run (`npx create-strapi@latest`).
 - The signed Strapi 3 inventory document from S0 (see §3 below).
 
@@ -109,14 +109,14 @@ A signed inventory document (markdown or PDF), committed to the repo, that inclu
 
 ---
 
-## 4. Fork and configure `hub-migration-tools`
+## 4. Fork and configure `icjia-migration-tools`
 
 ### 4.1 Fork or clone
 
 ```bash
-gh repo fork ICJIA/hub-migration-tools --clone=true --remote=true
-# or: git clone https://github.com/ICJIA/hub-migration-tools.git
-cd hub-migration-tools
+gh repo fork ICJIA/icjia-migration-tools --clone=true --remote=true
+# or: git clone https://github.com/ICJIA/icjia-migration-tools.git
+cd icjia-migration-tools
 ```
 
 Update `package.json` `name` to something specific (e.g., `icjia-public-site-migration`) so the fork is clearly scoped and its lockfiles don't collide.
@@ -384,7 +384,7 @@ Per `03-STRAPI-UPGRADE-PLAN.md` §9: Strapi 3 is kept read-only for **30 days** 
 
 ## 10. Post-migration sign-off
 
-### 10.1 Manual QA (carried from hub-migration-tools Phase 5)
+### 10.1 Manual QA (carried from icjia-migration-tools Phase 5)
 
 Using the validation report's checklist:
 
@@ -405,7 +405,7 @@ Decommission of Strapi 3 is scheduled for **30 days after public cutover** (P8 e
 
 ## 11. Appendix — Known gotchas
 
-1. **Reserved `legacyId` field.** `hub-migration-tools` adds a `legacyId` attribute to every migrated schema, used to map Strapi 3 numeric IDs to Strapi 5 `documentId`s. ICJIA schemas in §5.1 must **not** pre-define `legacyId` — doing so breaks the upsert logic.
+1. **Reserved `legacyId` field.** `icjia-migration-tools` adds a `legacyId` attribute to every migrated schema, used to map Strapi 3 numeric IDs to Strapi 5 `documentId`s. ICJIA schemas in §5.1 must **not** pre-define `legacyId` — doing so breaks the upsert logic.
 2. **`fix-timestamps-remote.js` hardcoded SSH values.** The script ships pointing at the ResearchHub server (`137.184.64.249`, user `forge`, dir `/home/forge/v2.hub.icjia-api.cloud/v2hub`). Either export `REMOTE_HOST` / `REMOTE_USER` / `REMOTE_STRAPI_DIR` at invocation time (preferred) or edit the script's defaults before running.
 3. **`fix-image-refs.js` assumes an `images` JSON field.** Written for ResearchHub's article schema, which has an `images` JSON column. If ICJIA's `research-hub-article` (or equivalent) doesn't have this exact shape, the fix-refs step silently no-ops or errors. Verify during §5.2 and either add the field, adapt the script, or skip it.
 4. **Strapi 3 status filter.** The tool defaults `allowedStatuses` to `['published', 'archived']`. If ICJIA has meaningful draft content that must come along, extend this list during S0 and re-run Phase 02.
@@ -417,4 +417,4 @@ Decommission of Strapi 3 is scheduled for **30 days after public cutover** (P8 e
 - `03-STRAPI-UPGRADE-PLAN.md` — strategy document (what and why).
 - `04-PHASED-DELIVERABLE-PLAN.md` §4 — Strapi track phases S0–S9; this runbook covers S2/S3/S5 execution + the cutover within S9.
 - `02-MASTER-DESIGN-PLAN.md` §1.2 — content source boundaries.
-- [`ICJIA/hub-migration-tools`](https://github.com/ICJIA/hub-migration-tools) — external repo; v4.1.0 is the tested baseline.
+- [`ICJIA/icjia-migration-tools`](https://github.com/ICJIA/icjia-migration-tools) — external repo; v4.1.0 is the tested baseline.

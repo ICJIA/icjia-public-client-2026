@@ -1,20 +1,22 @@
 # ICJIA Public Website — Phased Deliverable Plan
 
-**Status:** DRAFT v0.2
+**Status:** DRAFT v0.3
 **Companion to:** `02-MASTER-DESIGN-PLAN.md`, `03-STRAPI-UPGRADE-PLAN.md`
-**Scope:** Per-phase task lists, entry/exit criteria, deliverables, dependencies, and risk flags for both the website rebuild and the Strapi upgrade tracks
-**Last updated:** 2026-04-24 (§2 third compression-factor bullet reworded to attribute schedule to the developer's demonstrable stack experience rather than methodology framing)
+**Scope:** Per-phase task lists, entry/exit criteria, deliverables, dependencies, and risk flags for the website rebuild (Nuxt track is the active work; Strapi track is COMPLETED and retained for the record)
+**Last updated:** 2026-05-03 (Strapi track marked COMPLETED — see [`ICJIA/icjia-migration-tools`](https://github.com/ICJIA/icjia-migration-tools); cross-track gates remain accurate since the Nuxt track will read from the already-migrated Strapi 5 instance)
 
 ---
 
 ## How to read this document
 
-Two tracks run in parallel:
+> **Note (2026-05-03):** The Strapi track described here is **complete**. The Strapi 3 → 5 migration has been executed via [`ICJIA/icjia-migration-tools`](https://github.com/ICJIA/icjia-migration-tools); the §4 phase descriptions are retained for the record (and to anchor the cross-track dependency framing). The active work is the Nuxt track in §3.
 
-- **Nuxt track** (P0–P8): the visible website rebuild. Phases are lifted from `02-MASTER-DESIGN-PLAN.md` §7 and expanded here.
-- **Strapi track** (S0–S9): the content-system upgrade. Phases are lifted from `03-STRAPI-UPGRADE-PLAN.md` §4 and expanded here.
+The original plan ran two tracks in parallel:
 
-The tracks are independent through early phases and converge around Nuxt Phase 4 (core content archetypes), which requires Strapi Phase S7 (integration with Nuxt staging) as its entry gate.
+- **Nuxt track** (P0–P8): the visible website rebuild. Phases are lifted from `02-MASTER-DESIGN-PLAN.md` §7 and expanded here. **This is the remaining work.**
+- **Strapi track** (S0–S9): the content-system upgrade. Phases are lifted from `03-STRAPI-UPGRADE-PLAN.md` §4 and expanded here. **Already executed; see `08-STRAPI-MIGRATION-RUNBOOK.md` and the migration-tools repo.**
+
+The tracks were independent through early phases and converged around Nuxt Phase 4 (core content archetypes), which required Strapi Phase S7 (integration with Nuxt staging) as its entry gate. Because S7 is already met, the front-end track has no remaining cross-track block.
 
 Each phase has: **entry criteria** (what must be true to start), **deliverables** (concrete artifacts), **exit gate** (the one question that answers "done?"), **dependencies** (what blocks this phase), and **risk flags** (known hazards).
 
@@ -70,7 +72,7 @@ The project's critical path runs through:
 Why this schedule is compressed compared to traditional estimates:
 
 - **Developer familiarity with the stack.** The developer has built the current ICJIA website and 15+ other sites on the same underlying technology (Vue, JavaScript, TypeScript). Work that would take a new developer weeks of ramp-up — page templates, CMS integration code, data-migration scaffolding, component implementation — takes days when the same patterns have been built, refined, and shipped on prior projects. This is the largest single compression factor; otherwise-multi-week phases collapse to days.
-- **`hub-migration-tools` as a starting point** for the Strapi track (see `03-STRAPI-UPGRADE-PLAN.md`). That tool already solves the phase scaffolding, parity audit, and fix-script patterns; adaptation cost is limited to expanding content-type handling.
+- **[`ICJIA/icjia-migration-tools`](https://github.com/ICJIA/icjia-migration-tools) handled the Strapi track end-to-end.** That tool — forked from `icjia-hub-migration-tools` and adapted for the public-site content types — already solved the phase scaffolding, parity audit, and fix-script patterns. The Strapi 3 → 5 migration is complete; this track is no longer on the project's critical path. See `03-STRAPI-UPGRADE-PLAN.md` and `08-STRAPI-MIGRATION-RUNBOOK.md` for the historical record.
 - **Planning is complete.** The project starts with known requirements, an approved visual direction, and a decided stack — no discovery phase.
 
 Phases with the largest remaining schedule uncertainty:

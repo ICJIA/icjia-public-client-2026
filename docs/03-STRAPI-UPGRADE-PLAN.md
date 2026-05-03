@@ -1,17 +1,19 @@
 # ICJIA Public Website — Strapi 3 → 5 Upgrade Plan
 
-**Status:** DRAFT v0.1
+**Status:** COMPLETED — strategy followed; the Strapi 3 → 5 migration has been executed. See [`ICJIA/icjia-migration-tools`](https://github.com/ICJIA/icjia-migration-tools) for the tool and audit record, and `08-STRAPI-MIGRATION-RUNBOOK.md` for the procedure as run.
 **Companion to:** `02-MASTER-DESIGN-PLAN.md`, `04-PHASED-DELIVERABLE-PLAN.md`
 **Resolves:** `07-OPEN-QUESTIONS.md` Q3 (Strapi upgrade scope and approach)
-**Last updated:** 2026-04-23
+**Last updated:** 2026-05-03 (status flipped to COMPLETED — tense in the body retained as a record of the strategy that was followed)
 
 ---
 
 ## 1. Context and recommendation
 
-The current production backend is Strapi 3. The new Nuxt app is written against Strapi 5's Document Service API. Some kind of upgrade is unavoidable. The question is *how*.
+> **Note (2026-05-03):** This plan describes the approach that was followed. The migration has been executed; what is below is retained as the record of *why* the parallel-fresh approach was chosen. Operational details are in `08-STRAPI-MIGRATION-RUNBOOK.md`. The migration tool itself lives at [`ICJIA/icjia-migration-tools`](https://github.com/ICJIA/icjia-migration-tools).
 
-**Recommendation: stand up a parallel fresh Strapi 5 instance.** Do not upgrade the production database in place through 3 → 4 → 5.
+The legacy production backend was Strapi 3. The new Nuxt app is written against Strapi 5's Document Service API. Some kind of upgrade was unavoidable; the question was *how*.
+
+**The committed approach: a parallel fresh Strapi 5 instance.** Not an in-place stepwise upgrade through 3 → 4 → 5.
 
 ### Why not in-place
 
