@@ -14,7 +14,7 @@ Full accessibility audit, visual polish, and performance tuning across the finis
 ## 2. Entry criteria
 
 - P6 exit gate met.
-- External accessibility reviewer engaged (if using one).
+- Accessibility ownership confirmed: project lead (Chris Schweda, IDS) runs the audit in-house. **Tooling stack: Siteimprove (continuous monitoring), Deque axe-core (build-time + dev), Lighthouse (build-time + sampled).** No external reviewer is engaged on this project.
 
 ## 3. Scope of work
 

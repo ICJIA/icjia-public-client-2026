@@ -46,12 +46,18 @@ This replaces the runtime `fix*` pattern. The prior codebase's `fixBlankTableHea
 
 These run in CI on every pull request and every production deploy. Failures block the merge/deploy.
 
-- **axe-core** across every page. Zero violations required.
+- **Deque axe-core** across every page. Zero violations required. Run both at build time (CI) and during development (`@axe-core/playwright` or browser extension).
 - **Lighthouse CI** with per-page accessibility score budget of 100.
 - **Link checker** catches broken internal links.
 - **HTML validator** catches malformed output (unclosed tags, invalid nesting).
 - **CSS contrast linter** validates tokens-as-used against documented contrast floors (see `05-DESIGN-SYSTEM.md` §1.4).
 - **Build-time content validators** (see Section 2 above) catch CMS content issues before publish.
+
+**Continuous monitoring (post-deploy):**
+
+- **Siteimprove** runs against the production site on its own cadence and surfaces issues that appear after deploy — including ones introduced by content authors writing in Strapi 5 (broken alt text, heading-order regressions, link rot). Findings flow to the project lead for triage.
+
+The tooling stack — **Deque axe-core + Lighthouse + Siteimprove** — combined with the manual gates in §4, covers the full accessibility surface without requiring an external reviewer. The project lead (Chris Schweda, IDS) runs the manual passes directly.
 
 ---
 
@@ -70,7 +76,7 @@ Automated tests cover the structural surface. The experience itself requires hum
 
 ## 5. Start-of-project checklist
 
-Adapted from `docs/NUXT-ARCHITECTURE-RECOMMENDATIONS.md`. To be handed to the accessibility consultant (if engaged) at project kickoff, not at the end.
+Adapted from `docs/NUXT-ARCHITECTURE-RECOMMENDATIONS.md`. This is the operating checklist used by the project lead (Chris Schweda, IDS) at project kickoff and re-walked at every phase exit. **Accessibility is owned in-house on this project; no external reviewer is engaged.**
 
 - [ ] Keyboard-only navigation: every interactive element reachable via Tab
 - [ ] Focus visible at every step (no missing or hidden focus rings)

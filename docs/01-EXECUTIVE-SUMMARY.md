@@ -129,10 +129,10 @@ Each section is completed — design reviewed, accessibility reviewed, any conte
 
 Before the new site takes over the public address, two rounds of testing happen on the staging copy (the private working version at `next.icjia.illinois.gov`):
 
-- **Accessibility review.** A person trained in screen-reader use and keyboard-only navigation walks through every template and files any issues. We fix them. They walk through again.
+- **Accessibility pass.** Run by the project lead (Chris Schweda, IDS), walking every template with a screen reader, then keyboard-only, then 200% zoom, then reduced-motion. Backed by automated tooling on every deploy — **Deque axe-core** (zero violations required), **Lighthouse** (accessibility score 100 required), and **Siteimprove** (continuous monitoring of the production site post-deploy). Issues are recorded, fixed, and re-walked. This is hands-on testing on top of automation, not a checklist exercise; the purpose is to catch the kinds of problems automated tools miss.
 - **Author testing.** Staff authors try drafting, previewing, and publishing real content into the new publishing tool and watching it appear correctly on the new site. They file any issues. We fix them. They try again.
 
-Neither test is skipped, and neither is replaced by an automated check. The purpose is to surface the kinds of problems that only a real person using the site can find.
+Neither pass is skipped, and neither is replaced by an automated check. The purpose is to surface the kinds of problems that only a real person using the site can find.
 
 ### 6.5 Cutover is a 2-hour event; the old site stays on standby for 30 days
 
@@ -173,7 +173,7 @@ The remaining work is a single track — the visible website. Numbers are workin
 - *The publishing-tool upgrade* — Strapi 3 to Strapi 5, including the data migration of every content type, media file, and relation. See [`ICJIA/icjia-migration-tools`](https://github.com/ICJIA/icjia-migration-tools) for the tool and audit record.
 - *The Research Hub* (per §1.1) — being delivered on its own track, on its own infrastructure, with hub URLs preserved for SEO continuity. Expected to complete within months — before the public-site rebuild needs anything from it. The 6–8 week estimate above is for the public site only and is meaningfully lighter than a like-for-like rebuild of today's bundled site would have been.
 
-**What stays on a human timeline.** Accessibility reviews by real people, author testing on the new editing tool, and final stakeholder approval. These are deliberately not compressed; they are where we catch problems that no amount of automation would surface.
+**What stays on a human timeline.** Hands-on accessibility passes (screen reader, keyboard, zoom, reduced motion — run by the project lead directly), author testing on the new editing tool, and final stakeholder approval. These are deliberately not compressed; they are where we catch problems that no amount of automation would surface.
 
 **Milestones visible to leadership:**
 
@@ -184,13 +184,12 @@ The remaining work is a single track — the visible website. Numbers are workin
 
 ## 8. What we need from leadership
 
-Three decisions, none of them large:
+Two decisions, neither of them large:
 
 1. **Approval to begin the front-end rebuild.** The publishing-tool migration is already done; the front-end rebuild is the remaining work and is the subject of this document. Leadership confirms the start.
-2. **An accessibility reviewer.** Either someone internal or an external consultant, available during weeks 6–8. Engaging a reviewer early — rather than at the end — catches problems while there is still time to fix them.
-3. **A cutover window.** A pre-announced, pre-scheduled window of about two hours on a low-traffic day (weekend morning, late evening) when we switch the public address. Two weeks of advance notice is typical. Leadership picks the day.
+2. **A cutover window.** A pre-announced, pre-scheduled window of about two hours on a low-traffic day (weekend morning, late evening) when we switch the public address. Two weeks of advance notice is typical. Leadership picks the day.
 
-Everything else — the development, the testing, the setup — happens without leadership intervention.
+Everything else — the development, the testing, the accessibility work, the setup — happens without leadership intervention. **Accessibility is owned in-house** by the project lead (Chris Schweda, IDS). The audit stack combines **Siteimprove** (continuous post-deploy monitoring of the production site), **Deque axe-core** (build-time and development-time, blocks merges on violations), and **Lighthouse** (per-page accessibility score budget of 100), with hands-on screen-reader, keyboard-only, 200%-zoom, and reduced-motion passes done directly by the project lead. **No external accessibility reviewer needs to be procured for this project.**
 
 ## 9. Risks worth naming at the leadership level
 

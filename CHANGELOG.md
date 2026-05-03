@@ -9,6 +9,35 @@ Versioning: [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Pre-1.0 
 
 ---
 
+## [0.12.2] — 2026-05-03
+
+Accessibility-ownership patch: remove the "external accessibility reviewer / consultant" framing from the planning set; document the in-house tooling stack the project lead actually uses.
+
+### Why
+
+User direction: the project lead (Chris Schweda, IDS) owns accessibility on this project and uses **Deque axe-core** (build-time + dev), **Lighthouse** (build-time), and **Siteimprove** (continuous post-deploy monitoring), in combination with hands-on screen-reader / keyboard / zoom / reduced-motion passes. No external reviewer is needed. The leadership-facing exec summary previously listed "an accessibility reviewer" as one of the decisions blocking project start; that decision is removed.
+
+### Changed
+
+- **`docs/01-EXECUTIVE-SUMMARY.md` §8 leadership decisions — three → two.** Removed "An accessibility reviewer" decision (no longer needed). Closing paragraph adds an explicit "Accessibility is owned in-house" statement and names the tooling stack (Siteimprove + Deque axe-core + Lighthouse).
+- **`docs/01-EXECUTIVE-SUMMARY.md` §6.4 testing description** — "Accessibility review" reframed as "Accessibility pass" run by the project lead, with the automated tools (axe-core, Lighthouse, Siteimprove) named as the second layer.
+- **`docs/01-EXECUTIVE-SUMMARY.md` §7 timeline note** — "Accessibility reviews by real people" reworded to "Hands-on accessibility passes ... run by the project lead directly."
+- **`docs/06-ACCESSIBILITY-STRATEGY.md` §3 automated gates** — `axe-core` line clarified to `Deque axe-core` with a note about `@axe-core/playwright`/browser extension for dev. New paragraph on continuous monitoring naming **Siteimprove**. Closing paragraph names the full stack and the in-house ownership.
+- **`docs/06-ACCESSIBILITY-STRATEGY.md` §5 start-of-project checklist** — preamble reworked: this is the project lead's operating checklist, not a deliverable to hand to a consultant. Affirmative statement that no external reviewer is engaged.
+- **`docs/02-MASTER-DESIGN-PLAN.md` §5 accessibility summary** — `axe-core` clarified to `Deque axe-core`; Siteimprove added; manual passes attributed to the project lead; affirmative statement that no external reviewer is engaged.
+- **`docs/04-PHASED-DELIVERABLE-PLAN.md` Phase 7 entry criteria** — "External accessibility reviewer engaged (if using one)" replaced with a confirmation of in-house ownership.
+- **`docs/phases/P7-a11y-polish.md` entry criteria** — same change as the phased plan, plus the tooling stack named inline.
+- **`docs/00-README.md` reading-paths table** — "Accessibility reviewer" row removed from the role-based reading paths (no such role on this project).
+- **`docs/00-README.md` document-status table** — audience for `06-ACCESSIBILITY-STRATEGY.md` updated from "frontend, QA, a11y reviewers" to "frontend, QA, project lead (a11y is owned in-house — no external reviewer)."
+
+### Not changed
+
+- Manual-pass discipline (per-sprint VoiceOver / NVDA / keyboard / zoom / reduced-motion in both themes) — unchanged. The project lead now performs these directly rather than handing them to a consultant; the cadence and coverage are the same.
+- Automated-gate failure thresholds (axe-core zero violations, Lighthouse accessibility 100, contrast floors) — unchanged.
+- The accessibility *target* — WCAG 2.1 AA baseline, AAA for core reading paths — unchanged.
+
+---
+
 ## [0.12.1] — 2026-05-03
 
 Repository-hygiene patch: untrack the migration-tools repo dump (`docs/icjia-icjia-migration-tools-*.txt`) and add a `.gitignore` rule so the pattern doesn't return. The file remains in the working tree as a local-only reference; it is no longer in git history going forward.

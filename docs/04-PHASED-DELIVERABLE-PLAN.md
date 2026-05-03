@@ -260,7 +260,7 @@ Feature parity on search and gated surfaces. Authors log into admin and complete
 
 **Entry criteria**
 - P6 exit gate met.
-- External accessibility reviewer engaged (if using one).
+- Accessibility ownership confirmed: project lead (Chris Schweda, IDS) runs the audit in-house. No external reviewer is engaged on this project.
 
 **Deliverables**
 - Full accessibility audit completed per `06-ACCESSIBILITY-STRATEGY.md` §3 and §4.
